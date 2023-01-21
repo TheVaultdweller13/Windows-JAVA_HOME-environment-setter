@@ -2,17 +2,17 @@ $JavaFolders = New-Object System.Collections.Generic.List[System.Object]
 
 $JavaPath = "C:\Program Files\Java\"
 if (Test-Path $JavaPath) {
-    $JavaFolders.AddRange( (Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
+    $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
 }
 
 $JavaPath = "C:\Program Files (x86)\Java\"
 if (Test-Path $JavaPath) {
-    $JavaFolders.AddRange( (Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
+    $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
 }
 
 $JavaPath = "$env:USERPROFILE\.jdks\"
 if (Test-Path $JavaPath) {
-    $JavaFolders.AddRange( (Get-ChildItem -Path "$JavaPath\*jdk*" -Directory))
+    $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\*jdk*" -Directory))
 }
 
 if (!$JavaFolders) {
@@ -37,7 +37,7 @@ do {
 $JavaHome = $JavaFolders[0].FullName
 [Environment]::SetEnvironmentVariable("JAVA_HOME", $JavaHome, "User")
 
-Write-Host "Your JAVA_HOME environment variable has been updated to $JavaHome "
+Write-Host "Script has finished, JAVA_HOME has been set to $JavaHome"
 Write-Host "Closing..." 
 Start-Sleep -Seconds 3
 exit
