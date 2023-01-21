@@ -27,9 +27,13 @@ $JavaFolders | ForEach-Object {Write-Host $_.FullName}
 do {
     $JavaVersion = Read-Host "Enter the Java version you want to use (Ex: 16). Press 0 to exit"
     $JavaFolders = $JavaFolders | Where-Object {$_.Name -match "jdk-?$JavaVersion"}
-    Write-Host "This Java version is not installed on your system, or I have not found it!"
+
     if ($JavaVersion.Equals('0')) {
         exit
+    }
+
+    if (!$JavaFolders) {
+        Write-Host "This Java version is not installed on your system, or I have not found it!"
     }
 
 } while(!$JavaFolders)
@@ -39,5 +43,5 @@ $JavaHome = $JavaFolders[0].FullName
 
 Write-Host "Script has finished, JAVA_HOME has been set to $JavaHome"
 Write-Host "Closing..." 
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 5
 exit
