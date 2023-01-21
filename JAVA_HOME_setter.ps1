@@ -5,7 +5,7 @@ $JavaPaths = @(
     "C:\Program Files (x86)\Java\",
     "$env:USERPROFILE\.jdks\")
 
-$JavaPaths | ForEach-Object {
+foreach($JavaPath In $JavaPaths) {
     if (Test-Path $JavaPath) {
         $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
     }
