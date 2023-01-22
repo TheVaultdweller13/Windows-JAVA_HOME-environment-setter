@@ -1,14 +1,18 @@
 $JavaFolders = New-Object System.Collections.Generic.List[System.Object]
 
-$JavaPaths = @(
-    "C:\Program Files\Java\",
-    "C:\Program Files (x86)\Java\",
-    "$env:USERPROFILE\.jdks\")
+$JavaPath = "C:\Program Files\Java\"
+if (Test-Path $JavaPath) {
+    $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
+}
 
-foreach($JavaPath In $JavaPaths) {
-    if (Test-Path $JavaPath) {
-        $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
-    }
+$JavaPath = "C:\Program Files (x86)\Java\"
+if (Test-Path $JavaPath) {
+    $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\jdk*" -Directory))
+}
+
+$JavaPath = "$env:USERPROFILE\.jdks\"
+if (Test-Path $JavaPath) {
+    $JavaFolders.AddRange((Get-ChildItem -Path "$JavaPath\*jdk*" -Directory))
 }
 
 if (!$JavaFolders) {
